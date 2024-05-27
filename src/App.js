@@ -1,24 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef, useEffect } from 'react';
+import Input from './components/Input';
 
 function App() {
+  const inputRef = useRef();
+
+  const focus = () => {
+    inputRef.current.focus();
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Input ref={inputRef} />
+      <button onClick={focus}>집중</button>
+    </>
   );
 }
 
