@@ -1,41 +1,25 @@
-import React, { useState, useReducer } from 'react';
-import { indexInitialState, ACTION_TYPES, reducer } from './reducer/indexReducer';
+import React, { useCallback, useState } from 'react';
+import Child from './components/Child';
 
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, indexInitialState);
+  const [parentAge, setParentAge] = useState(0);
+
+  const incrementParentAge = () => {
+    setParentAge(parentAge + 1);
+  };
+
+  console.log('👨‍👩‍👦부모 컴포넌트가 렌더링이 되었어요');
+
+  const tellMe = useCallback(() => {
+    console.log('😻콩이 사랑해');
+  }, []);
 
   return (
-    <div>
-      <button
-        onClick={() => {
-          dispatch({ type: ACTION_TYPES.CHANGE_TO_KOR });
-        }}
-      >
-        한글
-      </button>
-      <button
-        onClick={() => {
-          dispatch({ type: ACTION_TYPES.CHANGE_TO_ENG });
-        }}
-      >
-        English
-      </button>
-      <div>{state.text}</div>
-      <button
-        onClick={() => {
-          dispatch({ type: ACTION_TYPES.PLUS_COUNT });
-        }}
-      >
-        +
-      </button>
-      <button
-        onClick={() => {
-          dispatch({ type: ACTION_TYPES.MINUS_COUNT });
-        }}
-      >
-        -
-      </button>
-      <div>{state.count}</div>
+    <div style={{ border: '2px solid navy', padding: '10px' }}>
+      <h1>👨‍👩‍👦 부모</h1>
+      <p>age: {parentAge}</p>
+      <button onClick={incrementParentAge}>부모나이증가</button>
+      <Child name={'콩이'} tellMe={tellMe} />
     </div>
   );
 };
