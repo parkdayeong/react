@@ -1,17 +1,18 @@
-import { useInput } from './useInput';
-
-function displayMessage(message) {
-  alert(message);
-}
+import { useFetch } from './useFetch';
+const baseUrl = 'https://jsonplaceholder.typicode.com';
 
 const App = () => {
-  const [inputValue, handleChange, handleSubmit] = useInput('콩이', displayMessage);
-
+  const { data: userData } = useFetch(baseUrl, 'users');
+  const { data: postData } = useFetch(baseUrl, 'posts');
+  const { data: todoData } = useFetch(baseUrl, 'todos');
   return (
     <div>
-      <h1>useInput</h1>
-      <input value={inputValue} onChange={handleChange} />
-      <button onClick={handleSubmit}>확인</button>
+      <h1>user</h1>
+      {userData && <pre>{JSON.stringify(userData[0], null, 2)}</pre>}
+      <h1>post</h1>
+      {postData && <pre>{JSON.stringify(postData[0], null, 2)}</pre>}
+      <h1>todo</h1>
+      {todoData && <pre>{JSON.stringify(todoData[0], null, 2)}</pre>}
     </div>
   );
 };
