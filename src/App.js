@@ -1,17 +1,13 @@
-import { useInput } from './useInput';
-
-function displayMessage(message) {
-  alert(message);
-}
+import React, { useEffect } from 'react';
 
 const App = () => {
-  const [inputValue, handleChange, handleSubmit] = useInput('콩이', displayMessage);
+  useEffect(() => {
+    fetch('https://jsonplaceholder.typicode.com/users');
+  }, []);
 
   return (
     <div>
-      <h1>useInput</h1>
-      <input value={inputValue} onChange={handleChange} />
-      <button onClick={handleSubmit}>확인</button>
+      <h1>useFetch</h1>
     </div>
   );
 };
